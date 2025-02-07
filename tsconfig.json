@@ -1,0 +1,17 @@
+/**
+ * For a detailed explanation regarding each configuration property, visit:
+ * https://www.typescriptlang.org/tsconfig/
+ * For a good base template to follow, visit:
+ * https://github.com/actions/typescript-action/blob/main/tsconfig.json
+ */
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
