@@ -1,0 +1,45 @@
+{
+  "name": "setup-ghidra-update",
+  "version": "0.0.1",
+  "description": "This action updates your target Ghidra version for setup-ghidra actions.",
+  "author": "Antonio Vázquez Blanco",
+  "license": "MIT",
+  "homepage": "https://github.com/marketplace/actions/setup-ghidra-update",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antoniovazquezblanco/setup-ghidra-update.git"
+  },
+  "bugs": {
+    "url": "https://github.com/antoniovazquezblanco/setup-ghidra-update/issues"
+  },
+  "keywords": [
+    "actions",
+    "node",
+    "setup",
+    "ghidra",
+    "dependencies"
+  ],
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build src/setup-ghidra-update.ts",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --passWithNoTests"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@vercel/ncc": "^0.38.3",
+    "jest": "^30.0.0",
+    "prettier": "^3.5.3",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.1",
+    "@octokit/rest": "^22.0.0",
+    "compare-versions": "^6.1.1",
+    "yaml": "^2.8.0"
+  }
+}

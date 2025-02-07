@@ -1,0 +1,70 @@
+name: Main workflow
+on: [push, pull_request]
+
+env:
+  NODE_VERSION: "20.x"
+
+jobs:
+  linter:
+    name: Linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install node dependencies
+        run: npm install
+
+      - name: Lint
+        run: npm run format-check
+
+  build:
+    name: Build and test
+    needs: linter
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Check build status
+        run: git diff --exit-code --quiet && echo "No changes were found :)" || { git --no-pager diff; echo -e "Changes found after build.\nPlease run \"npm run build\" and commit the changes in the dist directory."; exit 1; }
+
+      - name: Test
+        run: npm test
+
+      - name: Upload coverage
+        uses: ArtiomTr/jest-coverage-report-action@v2.3.1
+        continue-on-error: true
+        with:
+          test-script: npm test
+
+  release:
+    needs: build
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release
+        uses: ncipollo/release-action@v1
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/v')
+        with:
+          allowUpdates: true
