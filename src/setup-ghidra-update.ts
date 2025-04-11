@@ -16,8 +16,12 @@ async function run() {
     const octokit = github_helper.getOctokit(paramAuthToken);
 
     // Get latest Ghidra release
-    const release = await github_helper.getLatestRelease(octokit, paramOwner, paramRepo)
-    console.log(release)
+    const release = await github_helper.getLatestRelease(
+      octokit,
+      paramOwner,
+      paramRepo,
+    );
+    console.log(release);
   } catch (err) {
     core.setFailed((err as Error).message);
   }
