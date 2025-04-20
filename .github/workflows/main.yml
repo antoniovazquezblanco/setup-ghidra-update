@@ -1,13 +1,12 @@
 name: Main workflow
 on: [push, pull_request]
 
+env:
+  node_version: 20.x
+
 jobs:
-  run:
-    name: Run
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+  linter:
+    name: Linter
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -15,16 +14,38 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: ${{ node_version }}
 
-      - name: Install
+      - name: Install node dependencies
         run: npm install
 
       - name: Lint
         run: npm run format-check
 
+  build:
+    name: Build and test
+    needs: linter
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ node_version }}
+
+      - name: Install
+        run: npm install
+
       - name: Build
         run: npm run build
+
+      - name: Check build status
+        run: git diff --exit-code --quiet && echo "No changes were found :)" || { git --no-pager diff; echo -e "Changes found after build.\nPlease run \"npm run build\" and commit the changes in the dist directory."; exit 1; }
 
       - name: Test
         run: npm test
@@ -35,11 +56,8 @@ jobs:
         with:
           test-script: npm test
 
-      - name: Check build status
-        run: git diff --exit-code --quiet && echo "No changes were found :)" || { git --no-pager diff; echo -e "Changes found after build.\nPlease run \"npm run build\" and commit the changes in the dist directory."; exit 1; }
-
   release:
-    needs: run
+    needs: build
     permissions:
       contents: write
     runs-on: ubuntu-latest
