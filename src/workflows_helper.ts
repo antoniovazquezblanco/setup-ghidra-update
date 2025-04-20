@@ -1,11 +1,11 @@
 import { promises as fsPromises } from "fs";
 
-async function getPipelineFolders(): Promise<string[]> {
+async function getWorkflowFolders(): Promise<string[]> {
   let folders = [".github/actions/", ".github/workflows/"];
   return folders;
 }
 
-async function getPipelineFolderFiles(folder: string): Promise<string[]> {
+async function getWorkflowFolderFiles(folder: string): Promise<string[]> {
   let files: string[] = [];
   for await (const entry of fsPromises.glob(`${folder}/**/*.yaml`))
     files.push(entry);
@@ -14,11 +14,10 @@ async function getPipelineFolderFiles(folder: string): Promise<string[]> {
   return files;
 }
 
-export async function getPipelineFiles() {
+export async function getWorkflowFiles() {
   let files: string[] = [];
-  let folders = await getPipelineFolders();
-  folders.forEach(async (f) => {
-    files.concat(await getPipelineFolderFiles(f));
-  });
+  let folders = await getWorkflowFolders();
+  for (const f of folders)
+    files = files.concat(await getWorkflowFolderFiles(f));
   return files;
 }
