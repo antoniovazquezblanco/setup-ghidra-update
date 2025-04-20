@@ -44326,14 +44326,14 @@ function getOctokit(auth_token) {
 async function getAllReleaseVersions(octokit, owner, repo) {
     const response = await octokit.rest.repos.listReleases({
         owner: owner,
-        repo: repo
+        repo: repo,
     });
     if (response.status != 200) {
         throw new Error(`Could not list releases for repo '${repo}' by the owner '${owner}'! Response status was ${response.status}...`);
     }
     let res = Array();
-    const re = new RegExp('^Ghidra_([0-9\.]+)_build$');
-    response.data.forEach(release => {
+    const re = new RegExp("^Ghidra_([0-9\.]+)_build$");
+    response.data.forEach((release) => {
         let matches = release.tag_name.match(re);
         if (matches != null)
             res.push(matches[1]);
@@ -44371,7 +44371,7 @@ var dist = __nccwpck_require__(8815);
 
 
 async function parseWorkflowFile(file) {
-    let fileContents = await external_fs_.promises.readFile(file, 'utf8');
+    let fileContents = await external_fs_.promises.readFile(file, "utf8");
     return dist/* parseDocument */.Tp(fileContents);
 }
 async function hasSetupGhidraAction(file) {
@@ -44383,7 +44383,7 @@ async function hasSetupGhidraAction(file) {
         Pair(key, node, path) {
             if (!dist/* isScalar */.jn(node.key))
                 return;
-            if (node.key.value !== 'uses')
+            if (node.key.value !== "uses")
                 return;
             if (!dist/* isScalar */.jn(node.value))
                 return;
@@ -44425,16 +44425,36 @@ async function run() {
         // TODO
         //const versions = await github_helper.getAllReleaseVersions(octokit, paramOwner, paramRepo);
         const versions = [
-            '11.3.1', '11.3', '11.2.1',
-            '11.2', '11.1.2', '11.1.1',
-            '11.1', '11.0.3', '11.0.2',
-            '11.0.1', '11.0', '10.4',
-            '10.3.3', '10.3.2', '10.3.1',
-            '10.3', '10.2.3', '10.2.2',
-            '10.2.1', '10.2', '10.1.5',
-            '10.1.4', '10.1.3', '10.1.2',
-            '10.1.1', '10.1', '10.0.4',
-            '10.0.3', '10.0.2', '10.0.1'
+            "11.3.1",
+            "11.3",
+            "11.2.1",
+            "11.2",
+            "11.1.2",
+            "11.1.1",
+            "11.1",
+            "11.0.3",
+            "11.0.2",
+            "11.0.1",
+            "11.0",
+            "10.4",
+            "10.3.3",
+            "10.3.2",
+            "10.3.1",
+            "10.3",
+            "10.2.3",
+            "10.2.2",
+            "10.2.1",
+            "10.2",
+            "10.1.5",
+            "10.1.4",
+            "10.1.3",
+            "10.1.2",
+            "10.1.1",
+            "10.1",
+            "10.0.4",
+            "10.0.3",
+            "10.0.2",
+            "10.0.1",
         ];
         // Get all possible pipeline files
         const workflowFiles = await getWorkflowFiles();
