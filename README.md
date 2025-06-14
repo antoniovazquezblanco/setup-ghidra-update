@@ -24,8 +24,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  dependabot_build:
-    if: ${{ github.actor == 'dependabot[bot]' }}
+  dependabot_ghidra:
     runs-on: ubuntu-latest
     steps:
       # First update the workflow files...
