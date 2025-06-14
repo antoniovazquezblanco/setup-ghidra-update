@@ -32,8 +32,35 @@ jobs:
           message: "Format source code"
 
   build:
-    name: Build and test
-    needs: linter
+    name: Build
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install node dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Commit distribution changes
+        uses: EndBug/add-and-commit@v9.1.4
+        with:
+          add: "dist/"
+          message: "Update distribution files"
+
+  test:
+    name: Test
+    needs: build
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
@@ -50,12 +77,6 @@ jobs:
       - name: Install
         run: npm install
 
-      - name: Build
-        run: npm run build
-
-      - name: Check build status
-        run: git diff --exit-code --quiet && echo "No changes were found :)" || { git --no-pager diff; echo -e "Changes found after build.\nPlease run \"npm run build\" and commit the changes in the dist directory."; exit 1; }
-
       - name: Test
         run: npm test
 
@@ -66,7 +87,7 @@ jobs:
           test-script: npm test
 
   release:
-    needs: build
+    needs: test
     permissions:
       contents: write
     runs-on: ubuntu-latest
