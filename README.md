@@ -7,17 +7,17 @@ This action tries to update the target version of your [setup-ghidra](https://gi
 
 This is useful when you try to explicitly support multiple Ghidra target versions.
 
-
 ## Usage
 
 This action is designed to be used in combination with a pull request creation action in a repo that already has a workflow that uses the `setup-ghidra` action.
 
 An example on how this may be used:
+
 ```yaml
 name: Dependabot for setup-ghidra
 on:
   schedule:
-    - cron: '17 12 * * 6' # Run once a week
+    - cron: "17 12 * * 6" # Run once a week
 
 permissions:
   contents: write
@@ -37,10 +37,10 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          add-paths: '.github/'
+          add-paths: ".github/"
           branch: dependabot_setup_ghidra
           delete-branch: true
-          title: 'Bump Ghidra version'
+          title: "Bump Ghidra version"
           labels: |
             dependencies
             github_actions
@@ -55,11 +55,11 @@ For a full reference of action parameters see [action.yml](action.yml)
   with:
     # The owner of the repository to look for Ghidra releases. By default, NSA
     # official user is used.
-    owner: 'NationalSecurityAgency'
+    owner: "NationalSecurityAgency"
 
     # A repository on which to find releases. By default, NSA official repo
     # name is used.
-    repository: 'ghidra'
+    repository: "ghidra"
 
     # Github authentication token to avoid API limiting.
     # This is optional.
