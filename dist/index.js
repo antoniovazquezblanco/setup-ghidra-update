@@ -44344,7 +44344,7 @@ async function getAllReleaseVersions(octokit, owner, repo) {
         throw new Error(`Could not list releases for repo '${repo}' by the owner '${owner}'! Response status was ${response.status}...`);
     }
     let res = Array();
-    const re = new RegExp("^Ghidra_([0-9\.]+)_build$");
+    const re = new RegExp("^Ghidra_([0-9.]+)_build$");
     response.data.forEach((release) => {
         let matches = release.tag_name.match(re);
         if (matches != null)
