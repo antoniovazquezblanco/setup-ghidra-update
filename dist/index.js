@@ -44355,25 +44355,40 @@ async function getAllReleaseVersions(octokit, owner, repo) {
 
 // EXTERNAL MODULE: external "fs"
 var external_fs_ = __nccwpck_require__(9896);
+// EXTERNAL MODULE: external "path"
+var external_path_ = __nccwpck_require__(6928);
 ;// CONCATENATED MODULE: ./src/workflows_helper.ts
+
 
 async function getWorkflowFolders() {
     let folders = [".github/actions/", ".github/workflows/"];
     return folders;
 }
-async function getWorkflowFolderFiles(folder) {
-    let files = [];
-    for await (const entry of external_fs_.promises.glob(`${folder}/**/*.yaml`))
-        files.push(entry);
-    for await (const entry of external_fs_.promises.glob(`${folder}/**/*.yml`))
-        files.push(entry);
-    return files;
+function hasYamlExtension(file) {
+    return file.endsWith(".yaml") || file.endsWith(".yml");
+}
+async function getYamlFilesRecursively(filepath) {
+    try {
+        const stats = await external_fs_.promises.stat(filepath);
+        if (stats.isFile() && hasYamlExtension(filepath)) {
+            return [filepath];
+        }
+        else if (stats.isDirectory()) {
+            const files = await external_fs_.promises.readdir(filepath);
+            const promises = files.map(async (file) => await getYamlFilesRecursively(external_path_.join(filepath, file)));
+            const resultsArray = await Promise.all(promises);
+            const results = resultsArray.reduce((all, res) => all.concat(res), []);
+            return results;
+        }
+    }
+    catch { }
+    return [];
 }
 async function getWorkflowFiles() {
     let files = [];
     let folders = await getWorkflowFolders();
     for (const f of folders)
-        files = files.concat(await getWorkflowFolderFiles(f));
+        files = files.concat(await getYamlFilesRecursively(f));
     return files;
 }
 
