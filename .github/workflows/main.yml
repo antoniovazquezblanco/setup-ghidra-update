@@ -7,6 +7,8 @@ env:
 jobs:
   lint:
     name: Lint
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,6 +36,8 @@ jobs:
   build:
     name: Build
     needs: lint
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -61,6 +65,9 @@ jobs:
   test:
     name: Test
     needs: build
+    permissions:
+      contents: read
+      checks: write
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
