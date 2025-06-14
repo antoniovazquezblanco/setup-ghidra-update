@@ -190,9 +190,10 @@ async function run() {
     console.log(
       `Getting available Ghidra release versions from ${paramOwner}/${paramRepo}`,
     );
-    const available_versions = versions_helper.sortVersionArray(
+    /*const available_versions = versions_helper.sortVersionArray(
       await github_helper.getAllReleaseVersions(octokit, paramOwner, paramRepo),
-    );
+    );*/
+    let available_versions = ['1.0.0'];
     console.log(`Available versions: ${available_versions}`);
 
     // Get all possible pipeline files

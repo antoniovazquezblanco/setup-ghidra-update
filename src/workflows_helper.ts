@@ -1,23 +1,36 @@
 import { promises as fsPromises } from "fs";
+import * as path from 'path';
 
 async function getWorkflowFolders(): Promise<string[]> {
   let folders = [".github/actions/", ".github/workflows/"];
   return folders;
 }
 
-async function getWorkflowFolderFiles(folder: string): Promise<string[]> {
-  let files: string[] = [];
-  for await (const entry of fsPromises.glob(`${folder}/**/*.yaml`))
-    files.push(entry);
-  for await (const entry of fsPromises.glob(`${folder}/**/*.yml`))
-    files.push(entry);
-  return files;
+function hasYamlExtension(file: string): boolean {
+  return file.endsWith('.yaml') || file.endsWith('.yml');
+}
+
+async function getYamlFilesRecursively(filepath: string): Promise<string[]> {
+  try {
+  const stats = await fsPromises.stat(filepath);
+  if (stats.isFile() && hasYamlExtension(filepath)) {
+    return [filepath];
+  } else if (stats.isDirectory()) {
+    const files = await fsPromises.readdir(filepath);
+    const promises = files.map(async file => await getYamlFilesRecursively(path.join(filepath, file)));
+    const resultsArray = await Promise.all(promises);
+    const results = resultsArray.reduce((all, res) => all.concat(res), []);
+    return results;
+  }
+  } catch {
+  }
+  return [];
 }
 
 export async function getWorkflowFiles() {
   let files: string[] = [];
   let folders = await getWorkflowFolders();
   for (const f of folders)
-    files = files.concat(await getWorkflowFolderFiles(f));
+    files = files.concat(await getYamlFilesRecursively(f));
   return files;
 }
