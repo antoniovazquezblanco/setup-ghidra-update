@@ -24,7 +24,7 @@ export async function getAllReleaseVersions(
     );
   }
   let res = Array<string>();
-  const re = new RegExp("^Ghidra_([0-9\.]+)_build$");
+  const re = new RegExp("^Ghidra_([0-9.]+)_build$");
   response.data.forEach((release) => {
     let matches = release.tag_name.match(re);
     if (matches != null) res.push(matches[1]);
