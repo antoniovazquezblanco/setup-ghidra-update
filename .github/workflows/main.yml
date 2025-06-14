@@ -5,8 +5,8 @@ env:
   NODE_VERSION: "20.x"
 
 jobs:
-  linter:
-    name: Linter
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
