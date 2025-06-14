@@ -87,6 +87,7 @@ jobs:
           test-script: npm test
 
   release:
+    name: Release
     needs: test
     permissions:
       contents: write
