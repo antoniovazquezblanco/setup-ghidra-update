@@ -66,8 +66,9 @@ jobs:
     name: Test
     needs: build
     permissions:
-      contents: read
+      contents: write
       checks: write
+      pull-requests: write
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
