@@ -1,7 +1,7 @@
 [![CI](https://github.com/antoniovazquezblanco/setup-ghidra-update/actions/workflows/main.yml/badge.svg)](https://github.com/antoniovazquezblanco/setup-ghidra-update/actions/workflows/main.yml)
 [![CodeQL](https://github.com/antoniovazquezblanco/setup-ghidra-update/actions/workflows/codeql.yml/badge.svg)](https://github.com/antoniovazquezblanco/setup-ghidra-update/actions/workflows/codeql.yml)
 
-# setup-ghidra-update
+# Setup Ghidra Update Action
 
 This action tries to update the target version of your [setup-ghidra](https://github.com/antoniovazquezblanco/setup-ghidra) action.
 
