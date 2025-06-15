@@ -27,7 +27,13 @@ jobs:
   dependabot_ghidra:
     runs-on: ubuntu-latest
     steps:
-      # First update the workflow files...
+      # First clone the project...
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      # Update the workflow files...
       - name: Check and update Ghidra versions
         uses: antoniovazquezblanco/setup-ghidra-update@v0.0.1
         with:
