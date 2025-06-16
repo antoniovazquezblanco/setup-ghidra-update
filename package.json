@@ -28,7 +28,7 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --passWithNoTests"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.14",
+    "@types/jest": "^30.0.0",
     "@vercel/ncc": "^0.38.3",
     "jest": "^30.0.0",
     "prettier": "^3.5.3",
