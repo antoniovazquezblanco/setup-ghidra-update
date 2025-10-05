@@ -156,7 +156,11 @@ export async function setVersionsInMatrixVariable(
   versions: Array<string>,
 ) {
   let node_new = new yaml.YAMLSeq<yaml.Scalar<string>>();
-  versions.forEach((ver) => node_new.add(new yaml.Scalar(ver)));
+  versions.forEach((ver) => {
+    let scalar = new yaml.Scalar(ver);
+    scalar.tag = "!!str";
+    node_new.add(scalar);
+  });
   variable.value = node_new;
 }
 

@@ -40104,7 +40104,7 @@ function blockString({ comment, type, value }, ctx, onComment, onChompKeep) {
     const { blockQuote, commentString, lineWidth } = ctx.options;
     // 1. Block can't end in whitespace unless the last line is non-empty.
     // 2. Strings consisting of only whitespace are best rendered explicitly.
-    if (!blockQuote || /\n[\t ]+$/.test(value)) {
+    if (!blockQuote || /\n[\t ]+$/.test(value) || /^\s*$/.test(value)) {
         return quotedString(value, ctx);
     }
     const indent = ctx.indent ||
@@ -44544,7 +44544,11 @@ async function getVersionsFromMatrixVariable(variable) {
 }
 async function setVersionsInMatrixVariable(variable, versions) {
     let node_new = new dist/* YAMLSeq */.Rw();
-    versions.forEach((ver) => node_new.add(new dist/* Scalar */.X5(ver)));
+    versions.forEach((ver) => {
+        let scalar = new dist/* Scalar */.X5(ver);
+        scalar.tag = "!!str";
+        node_new.add(scalar);
+    });
     variable.value = node_new;
 }
 async function writeWorkflowFile(path, doc) {
