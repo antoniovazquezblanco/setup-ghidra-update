@@ -6,7 +6,7 @@ export function sortVersionArray(versions: Array<string>): Array<string> {
 
 export function getLatestVersion(versions: Array<string>): string | null {
   if (versions.length == 0) return null;
-  if ("latest" in versions) {
+  if (versions.includes("latest")) {
     return "latest";
   }
   const sorted = versions.sort(compareVersions);
