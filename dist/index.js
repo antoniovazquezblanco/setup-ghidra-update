@@ -44781,7 +44781,7 @@ async function setVersionsInMatrixVariable(variable, versions) {
     let node_new = new dist/* YAMLSeq */.Rw();
     versions.forEach((ver) => {
         let scalar = new dist/* Scalar */.X5(ver);
-        scalar.tag = "!!str";
+        scalar.type = 'QUOTE_DOUBLE';
         node_new.add(scalar);
     });
     variable.value = node_new;

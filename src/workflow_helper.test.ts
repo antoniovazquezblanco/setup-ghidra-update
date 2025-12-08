@@ -67,5 +67,19 @@ describe("workflow_helper", () => {
       const seq = variable.value as yaml.YAMLSeq;
       expect(seq.items.length).toBe(0);
     });
+
+    it("should use double quotes for versions in string representation", async () => {
+      const variable = new yaml.Pair(
+        new yaml.Scalar("versions"),
+        new yaml.YAMLSeq(),
+      );
+      const versions = ["10.2.3", "10.3.0"];
+
+      await setVersionsInMatrixVariable(variable, versions);
+
+      const output = yaml.stringify(variable);
+      expect(output).toContain('"10.2.3"');
+      expect(output).toContain('"10.3.0"');
+    });
   });
 });
