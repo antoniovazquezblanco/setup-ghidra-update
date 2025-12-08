@@ -1,6 +1,4 @@
-import {
-  sortVersionArray
-} from "./versions_helper.js";
+import { sortVersionArray } from "./versions_helper.js";
 
 describe("versions_helper", () => {
   describe("sortVersionArray", () => {
