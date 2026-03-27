@@ -1,21 +1,21 @@
-name: 'Setup Ghidra Update Action'
-author: 'antoniovazquezblanco'
-description: 'Update yout setup-ghidra enabled pipelines'
+name: "Setup Ghidra Update Action"
+author: "antoniovazquezblanco"
+description: "Update yout setup-ghidra enabled pipelines"
 
 inputs:
   owner:
-    description: 'Owner of the repository to fetch Ghidra version from.'
-    default: 'NationalSecurityAgency'
+    description: "Owner of the repository to fetch Ghidra version from."
+    default: "NationalSecurityAgency"
   repo:
-    description: 'Repository to fetch Ghidra version from.'
-    default: 'ghidra'
+    description: "Repository to fetch Ghidra version from."
+    default: "ghidra"
   auth_token:
-    description: 'GitHub token for authentication.'
+    description: "GitHub token for authentication."
 
 runs:
-  using: 'node20'
-  main: 'dist/index.js'
+  using: "node24"
+  main: "dist/index.js"
 
 branding:
-  icon: 'code'
-  color: 'yellow'
+  icon: "code"
+  color: "yellow"
