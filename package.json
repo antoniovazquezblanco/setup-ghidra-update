@@ -25,7 +25,8 @@
     "build": "ncc build src/setup-ghidra-update.ts",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --passWithNoTests"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --passWithNoTests",
+    "ncu": "node node_modules/npm-check-updates/build/cli.js -u"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
