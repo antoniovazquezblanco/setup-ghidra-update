@@ -45224,6 +45224,8 @@ function getOctokitOptions(token, options) {
 }
 //# sourceMappingURL=utils.js.map
 ;// CONCATENATED MODULE: ./src/github_helper.ts
+// SPDX-FileCopyrightText: 2025 Antonio Vázquez Blanco
+// SPDX-License-Identifier: MIT
 
 
 function getOctokit(auth_token) {
@@ -45252,6 +45254,8 @@ async function getAllReleaseVersions(octokit, owner, repo) {
 }
 
 ;// CONCATENATED MODULE: ./src/workflows_helper.ts
+// SPDX-FileCopyrightText: 2025 Antonio Vázquez Blanco
+// SPDX-License-Identifier: MIT
 
 
 async function getWorkflowFolders() {
@@ -45289,6 +45293,8 @@ async function getWorkflowFiles() {
 // EXTERNAL MODULE: ./node_modules/yaml/dist/index.js
 var yaml_dist = __nccwpck_require__(8815);
 ;// CONCATENATED MODULE: ./src/workflow_helper.ts
+// SPDX-FileCopyrightText: 2025 Antonio Vázquez Blanco
+// SPDX-License-Identifier: MIT
 
 
 async function parseWorkflowFile(file) {
@@ -45452,6 +45458,8 @@ async function writeWorkflowFile(path, doc) {
 // EXTERNAL MODULE: ./node_modules/compare-versions/lib/umd/index.js
 var umd = __nccwpck_require__(9645);
 ;// CONCATENATED MODULE: ./src/versions_helper.ts
+// SPDX-FileCopyrightText: 2025 Antonio Vázquez Blanco
+// SPDX-License-Identifier: MIT
 
 function sortVersionArray(versions) {
     return versions.sort(umd.compareVersions);
@@ -45480,6 +45488,8 @@ function areVersionArraysTheSame(v1, v2) {
 }
 
 ;// CONCATENATED MODULE: ./src/setup-ghidra-update.ts
+// SPDX-FileCopyrightText: 2025 Antonio Vázquez Blanco
+// SPDX-License-Identifier: MIT
 
 
 
