@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2025 Antonio Vázquez Blanco
+// SPDX-License-Identifier: MIT
+
 import {
   sortVersionArray,
   getLatestVersion,

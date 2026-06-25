@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2025 Antonio Vázquez Blanco
+// SPDX-License-Identifier: MIT
+
 import { compare, compareVersions } from "compare-versions";
 
 export function sortVersionArray(versions: Array<string>): Array<string> {

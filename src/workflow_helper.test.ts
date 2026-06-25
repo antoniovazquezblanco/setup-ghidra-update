@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2025 Antonio Vázquez Blanco
+// SPDX-License-Identifier: MIT
+
 import * as yaml from "yaml";
 import { promises as fsPromises } from "fs";
 import * as path from "path";
