@@ -1,7 +1,8 @@
+# Setup Ghidra Update Action
+
 [![CI](https://github.com/antoniovazquezblanco/setup-ghidra-update/actions/workflows/main.yml/badge.svg)](https://github.com/antoniovazquezblanco/setup-ghidra-update/actions/workflows/main.yml)
 [![CodeQL](https://github.com/antoniovazquezblanco/setup-ghidra-update/actions/workflows/codeql.yml/badge.svg)](https://github.com/antoniovazquezblanco/setup-ghidra-update/actions/workflows/codeql.yml)
-
-# Setup Ghidra Update Action
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/antoniovazquezblanco/setup-ghidra-update/badge)](https://scorecard.dev/viewer/?uri=github.com/antoniovazquezblanco/setup-ghidra-update)
 
 This action tries to update the target version of your [setup-ghidra](https://github.com/antoniovazquezblanco/setup-ghidra) action.
 
