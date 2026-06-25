@@ -1,6 +1,8 @@
 name: Main workflow
 on: [push, pull_request]
 
+permissions: {}
+
 env:
   NODE_VERSION: "20.x"
 
@@ -66,7 +68,7 @@ jobs:
     name: Test
     needs: build
     permissions:
-      contents: write
+      contents: read
       checks: write
       pull-requests: write
     strategy:
